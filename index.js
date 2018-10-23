@@ -58,6 +58,7 @@ export default class Pdf extends Component {
         onError: PropTypes.func,
         onPageSingleTap: PropTypes.func,
         onScaleChanged: PropTypes.func,
+        onPageScaled: PropTypes.func,
 
         // Props that are not available in the earlier react native version, added to prevent crashed on android
         accessibilityLabel: PropTypes.string,
@@ -95,6 +96,9 @@ export default class Pdf extends Component {
         },
         onScaleChanged: (scale) => {
         },
+        onPageScaled: (scale) => {
+        },
+
     };
 
     constructor(props) {
@@ -342,6 +346,8 @@ export default class Pdf extends Component {
                 this.props.onPageSingleTap && this.props.onPageSingleTap(message[1]);
             } else if (message[0] === 'scaleChanged') {
                 this.props.onScaleChanged && this.props.onScaleChanged(message[1]);
+            } else if (message[0] === 'pageScaled') {
+                this.props.onPageScaled && this.props.onPageScaled(message[1]);
             }
         }
 

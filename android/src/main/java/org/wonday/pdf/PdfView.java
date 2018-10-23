@@ -305,6 +305,22 @@ public class PdfView extends PDFView implements OnPageChangeListener,OnLoadCompl
 
     }
 
+    @Override
+    public void zoomTo(float zoom) {
+        super.zoomTo(zoom);
+
+        WritableMap event = Arguments.createMap();
+        event.putString("message", "pageScaled|"+zoom);
+
+        ReactContext reactContext = (ReactContext)this.getContext();
+        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+                this.getId(),
+                "topChange",
+                event
+        );
+
+    }
+
     private void showLog(final String str) {
         Log.d("PdfView", str);
     }
